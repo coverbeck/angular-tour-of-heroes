@@ -32,12 +32,15 @@ jobs:
         docker:
             - image: circleci/python:2.7
         steps:
-          - attach_workspace:
-              at: .
-          - aws-s3/copy:
-              from: dist
-              to: 's3://overbeck.ui.builds'
-              arguments: '--recursive'
+          - when:
+              condition: <<parameters.AWS_BUCKET>>
+              steps:
+                - attach_workspace:
+                    at: .
+                - aws-s3/copy:
+                    from: dist
+                    to: 's3://${AWS_BUCKET}'
+                    arguments: '--recursive'
           
 workflows:
   version: 2
