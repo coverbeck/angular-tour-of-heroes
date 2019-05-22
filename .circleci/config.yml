@@ -38,7 +38,7 @@ workflows:
   everything:
     jobs:
       - build
-      - deploy
+      - deploy:
           requires:
             - build
 commands:
