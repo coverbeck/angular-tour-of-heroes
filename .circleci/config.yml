@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
     # The build job
     build:
@@ -21,3 +21,11 @@ jobs:
           - run:
               name: Build
               command: bash -i -c 'npm run build.prod'
+commands:
+  install_container_dependencies:
+    steps:
+      - run:
+          name: Install npm
+          command: |
+            wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+            bash -i -c 'nvm install'
