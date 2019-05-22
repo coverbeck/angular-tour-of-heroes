@@ -24,9 +24,9 @@ jobs:
               name: Build
               command: bash -i -c 'npm run build.prod'
           - persist_to_workspace:
-            root: .
-            paths:
-                - .
+              root: .
+              paths:
+                  - .
     deploy:
         working_directory: ~/repo
         docker:
