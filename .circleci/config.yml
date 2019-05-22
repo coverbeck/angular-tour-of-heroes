@@ -2,7 +2,7 @@ version: 2.1
 jobs:
     # The build job
     build:
-        working_directory: ~/project
+        working_directory: ~/repo
         docker:
             - image: circleci/buildpack-deps:18.04-browsers
         steps:
@@ -21,6 +21,11 @@ jobs:
           - run:
               name: Build
               command: bash -i -c 'npm run build.prod'
+workflows:
+  version: 2
+  everything:
+    jobs:
+      - build
 commands:
   install_container_dependencies:
     steps:
@@ -29,8 +34,3 @@ commands:
           command: |
             wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
             bash -i -c 'nvm install'
-workflows:
-  version: 2
-  everything:
-    jobs:
-      - build
