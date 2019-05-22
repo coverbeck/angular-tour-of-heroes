@@ -40,7 +40,7 @@ workflows:
       - build
       - deploy
           requires:
-            build
+            - build
 commands:
   install_container_dependencies:
     steps:
