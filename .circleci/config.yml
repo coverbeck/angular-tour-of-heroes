@@ -37,6 +37,7 @@ jobs:
           - aws-s3/copy:
               from: dist
               to: 's3://overbeck.ui.builds'
+              arguments: '--recursive'
           
 workflows:
   version: 2
