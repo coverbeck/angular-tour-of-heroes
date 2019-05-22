@@ -1,0 +1,23 @@
+version: 2
+jobs:
+    # The build job
+    build:
+        working_directory: ~/project
+        docker:
+            - image: circleci/buildpack-deps:18.04-browsers
+        steps:
+          # Checkout the code from the branch into the working_directory
+          - checkout
+          - install_container_dependencies
+          - run:
+              name: Install dependencies
+              command: bash -i -c 'npm ci'
+          - run:
+              name: Check dependencies
+              command: bash -i -c 'npm ls'
+          - run:
+              name: Lint
+              command: bash -i -c 'npm run lint'
+          - run:
+              name: Build
+              command: bash -i -c 'npm run build.prod'
