@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.0
 jobs:
     # The build job
     build:
@@ -21,6 +23,11 @@ jobs:
           - run:
               name: Build
               command: bash -i -c 'npm run build.prod'
+          - aws-s3/copy:
+            from: dist
+            to: 's3://overbeck.ui.builds'
+            arguments: '--dryrun'
+          
 workflows:
   version: 2
   everything:
