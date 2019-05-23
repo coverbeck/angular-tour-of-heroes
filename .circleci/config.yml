@@ -43,7 +43,7 @@ jobs:
                     at: .
                 - aws-s3/copy:
                     from: dist
-                    to: 's3://${AWS_BUCKET}/${CIRCLE-BRANCH}-${CIRCLE_SHA1}'
+                    to: 's3://${AWS_BUCKET}/${CIRCLE_BRANCH}-${CIRCLE_SHA1}'
                     arguments: '--recursive'
           
 workflows:
