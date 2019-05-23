@@ -50,10 +50,18 @@ workflows:
   version: 2
   everything:
     jobs:
-      - build
-      - deploy:
+      - build:
+          filters:
+            tags: # Needed because of the tag filter in deploy
+              only: /.*/
+      - deploy: # Only deploy tags
           requires:
             - build
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
 commands:
   install_container_dependencies:
     steps:
