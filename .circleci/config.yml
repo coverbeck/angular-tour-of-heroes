@@ -31,9 +31,13 @@ jobs:
         working_directory: ~/repo
         docker:
             - image: circleci/python:2.7
+        parameters:
+            aws_bucket:
+              type: string
+              default: "${AWS_BUCKET}"
         steps:
           - when:
-              condition: <<parameters.AWS_BUCKET>>
+              condition: <<parameters.aws_bucket>>
               steps:
                 - attach_workspace:
                     at: .
